@@ -1,82 +1,68 @@
-# Personal blog
+# The Quiet Argument
 
-A minimal, editorial-style blog for essays on business, human behaviour, relationships,
-personal growth, money, and everyday observations.
+*Same questions. Different angles.*
 
-It is built with plain HTML, CSS, and a little vanilla JavaScript. There is no build step,
-no framework, no database, no backend, and nothing to pay for. It runs on free GitHub Pages.
+An independent publication of essays on business, human behaviour, relationships, money,
+personal growth, and everyday life.
+
+The site is plain HTML, CSS, and a little vanilla JavaScript. There is no build step,
+framework, database, backend, or paid service. It's hosted free on GitHub Pages at
+**https://pranalidesai97-ai.github.io/personal-blog/**.
 
 ---
 
 ## What's in the folder
 
 ```
-index.html                     Home page: introduction, featured essay, latest essays
-about/index.html               About page
-articles/index.html            Essays archive (cards grouped by year, filter by topic)
-articles/a-sample-essay/       The sample article (PLACEHOLDER — replace or delete it)
-articles/_template/            A blank article to copy when you write a new one
+index.html                     Home: hero, topics, featured essay, latest essays
+articles/index.html            Essays archive (grouped by year, filter by topic)
+articles/a-sample-essay/       Sample essay (PLACEHOLDER: replace or delete it)
+articles/_template/index.html  Blank essay to copy for each new essay
+about/index.html               About the publication, plus an optional author note
 404.html                       "Page not found" page
-assets/css/style.css           All styles; colours and fonts are set at the top
-assets/js/config.js            Your name, tagline, topics, and social links
-assets/js/posts.js             The list of articles
-assets/js/main.js              Builds the lists and small interactive touches (no need to edit)
+assets/js/posts.js             ← The list of essays (edit when you publish)
+assets/js/config.js            ← Publication name, description, optional byline, social links
+assets/css/style.css           Design: colours and fonts are set at the very top
+assets/js/main.js              Builds the lists and small touches (no need to edit)
 assets/img/favicon.svg         Browser-tab icon
-.nojekyll                      Tells GitHub Pages to publish the files exactly as they are
+.nojekyll                      Tells GitHub Pages to publish the files as they are
 ```
 
----
-
-## 1. Make it yours
-
-### Your name, tagline, and social links
-
-Open **`assets/js/config.js`** and edit:
-
-- `siteName`: shown in the header, footer, and browser tab.
-- `author`: shown in the footer and under articles.
-- `tagline`: the line under your name in the footer.
-- `social`: fill in the `url` for each link you want to show. Links with an empty
-  url are hidden. Use `mailto:you@example.com` for email. You can add or remove
-  entries, for example `{ label: "Threads", url: "https://..." }`.
-
-The pages also contain "Your Name" as fallback text, used if JavaScript is off and in
-link previews. To change it everywhere, find and replace `Your Name` across the
-project (most code editors can do this: *Edit → Replace in Files*).
-
-### Home page introduction
-
-Edit the heading and paragraph inside `<section class="intro ...">` in **`index.html`**.
-
-### About page
-
-Replace the placeholder paragraphs in **`about/index.html`**, and delete the
-`<aside class="notice">` box marked *PLACEHOLDER TEXT*.
-
-### Colours and fonts
-
-The variables at the top of **`assets/css/style.css`** control the colours, fonts,
-and widths. Fonts come from Google Fonts, which is free and needs no key. To use
-system fonts only, delete the `fonts.googleapis.com` lines from each page's `<head>`.
+Day to day, you'll only touch **`posts.js`** and the essay files.
 
 ---
 
-## 2. Write and edit articles
+## Editing from an Android tablet
 
-Each article lives in its own folder, so its address is clean:
-`.../articles/your-article-slug/`.
+Everything can be done in the GitHub website, using Chrome on your tablet. No apps or
+software needed.
 
-### Add a new article
+**Tip:** in Chrome, tap ⋮ → **Desktop site** for the full GitHub editor. It's much
+easier to use than the mobile layout.
 
-1. **Copy** the folder `articles/_template/` and rename the copy to your article's slug,
-   e.g. `articles/the-cost-of-convenience/`. Use lowercase letters, numbers, and hyphens only.
-2. **Edit** `index.html` in the new folder. Everything you need to change is marked `EDIT`:
-   - the title (in `<title>`, the `og:title` meta tag, `data-page-title`, and the `<h1>`)
-   - `data-slug="..."` at the top: must match the folder name
-   - the description, topic, subtitle, and date
-   - the article body inside `<div class="prose dropcap">`
-   - delete the `<meta name="robots" content="noindex">` line
-3. **List it** in `assets/js/posts.js` by adding an entry:
+### Edit an existing file
+
+1. Open **github.com/pranalidesai97-ai/personal-blog** and tap through to the file.
+2. Tap the **pencil icon** (Edit this file).
+3. Make your change, then tap **Commit changes…** → **Commit changes**.
+4. The live site updates about one to two minutes later. Progress shows under the
+   **Actions** tab.
+
+### Publish a new essay
+
+1. Open `articles/_template/index.html`, tap the **copy raw file** icon, and copy
+   everything.
+2. Go back to the `articles` folder, tap **Add file → Create new file**, and type the name
+   `your-essay-slug/index.html`. Typing the `/` creates the folder. Use lowercase letters,
+   numbers, and hyphens only, e.g. `the-cost-of-convenience/index.html`.
+3. Paste the template, then change everything marked **EDIT**:
+   - the title (in four places: `data-page-title`, `<title>`, `og:title`, and the `<h1>`)
+   - `data-slug="…"`, which must match the folder name
+   - the description, topic, introduction, and date
+   - the essay text, between `START OF ESSAY TEXT` and `END OF ESSAY TEXT`
+   - delete the line `<meta name="robots" content="noindex">`
+4. Commit the new file.
+5. Open **`assets/js/posts.js`**, add an entry at the top of the list, and commit:
 
    ```js
    {
@@ -89,103 +75,134 @@ Each article lives in its own folder, so its address is clean:
    },
    ```
 
-   The home page, archive, and "previous / next essay" links update automatically.
-   Add `featured: true` to pin an article as the home page's featured essay; otherwise
-   the newest article is featured.
+   Keep the comma between entries. The home page, the archive, and "Related essays"
+   update automatically. Add `featured: true` to pin an essay as the featured one;
+   otherwise the newest essay is featured.
 
-### Writing the article body
+**Drafts:** an essay that has a folder but no entry in `posts.js` is unlisted. It isn't
+shown anywhere on the site, but you can open it by its address to proofread on the live
+site before you add it to `posts.js`.
 
-Inside `<div class="prose">`, use ordinary HTML:
+### Add a cover image (optional)
+
+1. Open the essay's folder on GitHub and tap **Add file → Upload files**. Upload an image
+   named, for example, `cover.jpg`. Landscape images around 1600 × 1067 px work best;
+   keep files under about 500 KB so pages stay fast.
+2. In `posts.js`, add `cover: "cover.jpg", coverAlt: "Short description of the image"` to
+   that essay's entry. The image then appears on its card.
+3. To show it at the top of the essay too, remove the comment markers around the
+   `<figure class="article-cover">` block in the essay's `index.html`.
+
+Use only images you have the rights to: your own photos, or freely licensed ones.
+
+### Writing the essay text
+
+Inside the essay text area, use these simple HTML tags:
 
 | You want | Write |
 | --- | --- |
 | Paragraph | `<p>Text</p>` |
-| Section heading | `<h2>Heading</h2>` (or `<h3>` for a sub-heading) |
+| Section heading | `<h2>Heading</h2>` (or `<h3>` for a smaller one) |
 | Bold / italic | `<strong>bold</strong>`, `<em>italic</em>` |
-| Link | `<a href="https://...">text</a>` |
+| Link | `<a href="https://…">text</a>` |
 | Quotation | `<blockquote><p>Quoted text</p></blockquote>` |
 | Pull quote | `<p class="pullquote">A line worth repeating</p>` |
 | Lists | `<ul><li>…</li></ul>` or `<ol><li>…</li></ol>` |
-| Section break | `<hr>` (shows as ⁂) |
+| Section break | `<hr>` |
 | Image | `<figure><img src="photo.jpg" alt="Description"><figcaption>Caption</figcaption></figure>` |
 
-Put images in the article's own folder and refer to them by file name, as in the table.
-The sample article shows all of these in use, including a footnote.
-
-### Topics
-
-Topics are listed in `config.js` (`topics`). An article's `topic` in `posts.js` should
-match one of them exactly. Visitors can filter the archive by topic, and the topic
-buttons on the home page link to those filtered views.
-
-### Remove the sample article
-
-Delete the folder `articles/a-sample-essay/`, remove its entry from `assets/js/posts.js`,
-and remove its line from the `<noscript>` list in `articles/index.html`.
+The sample essay uses every one of these, so it's a useful reference.
 
 ---
 
-## 3. Preview on your computer
+## Personalising the publication
 
-Pages link to folders (like `about/`), so preview through a small local web server.
-Opening the files by double-clicking won't follow those links correctly.
+### `assets/js/config.js`
 
-**Option A: Python** (already installed on macOS and most Linux systems):
+- `siteName`: the publication name, shown in the header, footer, and browser tabs.
+- `tagline`: the description in the footer.
+- `author`: leave empty to publish without a byline, or add your name to show
+  "By …" on every essay.
+- `topics`: the six topics. An essay's `topic` in `posts.js` must match one exactly.
+- `social`: add a `url` to show a link in the footer and on the About page; empty links
+  stay hidden. For email use `mailto:you@example.com`.
+
+### About page
+
+`about/index.html` has two parts:
+- the description of the publication (edit freely), and
+- an optional **About the author** section, marked *Placeholder*. Write a short
+  introduction to yourself there, or delete the whole `<section class="author-section">`
+  to keep the page about the publication only.
+
+### Colours and fonts
+
+The top of **`assets/css/style.css`** holds every colour and font:
+
+| Token | Colour | Used for |
+| --- | --- | --- |
+| `--ivory` | `#F8F3E8` | page background |
+| `--cream` | `#FFFDF7` | cards and panels |
+| `--charcoal` | `#292A27` | headlines, body text, navigation |
+| `--grey` | `#77736B` | decorative and large text |
+| `--grey-text` | `#6C6860` | small text such as dates (a touch darker than `--grey` so it stays readable on ivory) |
+| `--border` | `#DED5C4` | hairlines and borders |
+| `--mustard` | `#E8AD00` | buttons, active links, rules, category markers |
+| `--lemon` | `#F7D84A` | highlights, the placeholder badge, link hover |
+
+Mustard and lemon are too light to be readable as text on ivory, so the design uses them
+only as fills, lines, and highlights, always with charcoal text.
+
+Fonts are **DM Serif Display** (headlines, publication name) and **Source Sans 3**
+(everything else), loaded free from Google Fonts. If they can't load, the site falls back
+to Georgia and the device's system font.
+
+---
+
+## Previewing changes
+
+**On the live site (easiest from a tablet):** commit on GitHub, wait one to two minutes,
+then refresh **https://pranalidesai97-ai.github.io/personal-blog/**. If you still see the
+old version, pull down to refresh or open the page in an incognito tab; browsers sometimes
+cache the stylesheet.
+
+**On a computer:** pages link to folders (like `about/`), so use a small local server
+rather than double-clicking files:
 
 ```bash
 cd personal-blog
 python3 -m http.server 8000
 ```
 
-Then open <http://localhost:8000> in your browser. Press `Ctrl+C` to stop.
-
-**Option B: VS Code.** Install the free *Live Server* extension, open the folder, and click
-**Go Live** in the status bar.
-
-The custom 404 page only appears on GitHub Pages. Locally you can view it directly at
-<http://localhost:8000/404.html>.
+Then open <http://localhost:8000>. The custom 404 page appears only on GitHub Pages;
+locally you can view it at <http://localhost:8000/404.html>.
 
 ---
 
-## 4. Publish on GitHub Pages (free)
+## Publishing with GitHub Pages
 
-These steps assume the repository is named **`personal-blog`**, so the site will be at
-`https://YOUR-USERNAME.github.io/personal-blog/`.
+The site is published from the **`main`** branch. To set it up, or to check the settings:
 
-1. **Get the files onto your default branch.** On GitHub, open the repository. If the
-   site is on another branch, open a pull request from that branch into your default
-   branch (usually `main`) and merge it. (If the repository has no `main` branch yet,
-   merging the pull request, or pushing the branch as `main`, creates it.)
-2. Go to **Settings → Pages** (in the left sidebar under *Code and automation*).
-3. Under **Build and deployment**, set **Source** to **Deploy from a branch**.
-4. Under **Branch**, choose **`main`** and folder **`/ (root)`**, then click **Save**.
-5. Wait a minute or two. The Pages settings page shows the live address once the first
-   deployment finishes. You can follow its progress under the **Actions** tab
-   ("pages build and deployment").
-6. Visit `https://YOUR-USERNAME.github.io/personal-blog/`.
+1. In the repository, go to **Settings → Pages**.
+2. Under **Build and deployment**, set **Source** to **Deploy from a branch**.
+3. Choose branch **`main`** and folder **`/ (root)`**, then tap **Save**.
+4. The repository must be **public** for free GitHub Pages.
 
-From then on, every change you push or merge to `main` republishes the site automatically.
-
-> **Free-plan note:** on a free GitHub account, Pages works for **public** repositories.
-> Publishing from a private repository needs a paid plan.
+Every commit to `main` republishes the site automatically.
 
 ### If you rename the repository or use a custom domain
 
-All links are relative, so the site works at any address. **One** setting needs updating:
-in **`404.html`**, change `SITE_BASE`:
-
-- Renamed repository, e.g. `essays` → `var SITE_BASE = "/essays/";`
-- A user site (`YOUR-USERNAME.github.io` repository) or a custom domain → `var SITE_BASE = "/";`
-
-To use your own domain, add it under **Settings → Pages → Custom domain** and follow
-GitHub's DNS instructions. No other files need to change.
+Links are relative, so the site works at any address. Only one line needs to change:
+`SITE_BASE` near the top of **`404.html`**. Set it to `"/new-name/"` for a renamed
+repository, or `"/"` for a custom domain.
 
 ---
 
 ## Notes
 
-- **No tracking, no cookies.** The only outside requests are for Google Fonts.
-- **Accessibility:** includes a skip-to-content link, keyboard focus styles, and a
-  reduced-motion setting. Text colours meet WCAG AA contrast.
-- **Without JavaScript,** articles and pages still display fully. Only the automatic
-  lists (home, archive), social links, and the reading-progress bar need it.
+- **No tracking, no cookies.** The only outside request is to Google Fonts.
+- **Accessibility:** every text colour meets WCAG AA contrast. The site also has a
+  skip-to-content link, visible keyboard focus, tap targets sized for touch, and respects
+  the reduced-motion setting.
+- **Without JavaScript,** pages and essays still display. Only the automatic lists, social
+  links, and the reading-progress bar need it.
