@@ -36,8 +36,8 @@ google_site_verification: ""
 giscus:
   repo: "pranalidesai97-ai/personal-blog"
   repo_id: "R_kgDOVY043g"            # from giscus.app
-  category: "General"                # the Discussions category name
-  category_id: "DIC_kwDOVY043s4DJvns" # from giscus.app
+  category: "Announcements"          # the Discussions category name (Announcement format)
+  category_id: "DIC_kwDOVY043s4DJvnr" # from giscus.app
   mapping: "pathname"    # one discussion per essay address
   strict: "1"            # match the address exactly, never a similar one
   reactions_enabled: "1"
