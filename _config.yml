@@ -27,7 +27,7 @@ twitter_username: ""
 
 # Optional. Google Search Console "HTML tag" verification code (only the
 # content="..." value). See PUBLISHING-GUIDE.md, section 8.
-google_site_verification: ""
+google_site_verification: "CwDAxfetaCNvt5ZdQmOxw2kyLrbO3iF50rPC9_lpdQE"
 
 # Comments and reactions on essays, via giscus (https://giscus.app), which stores
 # them in this repository's GitHub Discussions. The section stays switched off
