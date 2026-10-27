@@ -47,6 +47,8 @@ giscus:
 # Image used when a page or essay has no image of its own (1200 × 630).
 social_image: "/assets/images/social/default.png"
 social_image_alt: "The Quiet Argument: Same questions. Different angles."
+social_image_width: 1200   # update these two if the image above is replaced
+social_image_height: 630
 
 # The topics. An essay's "category" must match one of these exactly.
 topics:
