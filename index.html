@@ -73,7 +73,7 @@ description: "Same questions. Different angles. Essays on business, human behavi
     <!-- ===== Featured essay ===== -->
     <section class="section container" aria-labelledby="featured-heading">
       <div class="section-head">
-        <h2 class="section-title" id="featured-heading">Featured essay</h2>
+        <h2 class="section-title" id="featured-heading">{% if essays.size == 1 %}The first essay{% else %}Featured essay{% endif %}</h2>
         <a class="text-link section-link" href="{{ '/articles/' | relative_url }}">All essays <span aria-hidden="true">→</span></a>
       </div>
       {%- if featured %}

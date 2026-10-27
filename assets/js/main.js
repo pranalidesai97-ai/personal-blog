@@ -54,7 +54,15 @@
       });
 
       var filtering = topic || words.length;
-      if (empty) empty.hidden = shown > 0;
+      if (empty) {
+        empty.hidden = shown > 0;
+        var emptyText = empty.querySelector("[data-archive-empty-text]");
+        if (emptyText) {
+          emptyText.textContent = topic && !words.length
+            ? "Nothing published in " + topicName(topic) + " yet."
+            : "No essays match your search.";
+        }
+      }
       if (status) {
         if (!filtering) {
           status.textContent = "";
