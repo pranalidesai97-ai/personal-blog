@@ -147,6 +147,29 @@ def check_essays(topics):
     return essays
 
 
+def check_giscus(config):
+    """Comments must be either fully configured or fully off, never half."""
+    g = config.get("giscus") or {}
+    needed = {"repo_id": "R_", "category": "", "category_id": "DIC_"}
+    filled = [key for key in needed if str(g.get(key) or "").strip()]
+    if not filled:
+        print("  comments: off (giscus values not filled in)")
+        return
+    missing = [key for key in needed if key not in filled]
+    if missing:
+        error(f"_config.yml giscus: {', '.join(missing)} missing, so comments stay off. "
+              "Copy all values from https://giscus.app")
+        return
+    for key, prefix in needed.items():
+        if prefix and not str(g[key]).startswith(prefix):
+            error(f"_config.yml giscus: {key} should start with '{prefix}' (copy it exactly from https://giscus.app)")
+    if g.get("repo") != "pranalidesai97-ai/personal-blog":
+        warn(f"_config.yml giscus: repo is '{g.get('repo')}', not this repository")
+    if g.get("mapping") != "pathname":
+        warn(f"_config.yml giscus: mapping is '{g.get('mapping')}'; essays are matched by 'pathname'")
+    print("  comments: on (giscus configured)")
+
+
 def check_images(essays):
     if not os.path.isdir(IMAGES):
         return
@@ -302,6 +325,7 @@ def main():
     essays = check_essays(topics)
     print(f"  {len(essays)} essay(s) in _essays/")
     check_images(essays)
+    check_giscus(config)
     if args.against:
         check_against(args.against, essays, args.allow_removal)
     if args.built:

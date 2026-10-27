@@ -42,6 +42,10 @@ edit essays. Follow `PUBLISHING-GUIDE.md`; the rules below are the non-negotiabl
    invent image credits or claim usage rights without evidence from the owner.
 9. **Never commit secrets** (tokens, passwords, API keys, `.env` files).
 10. **Don't change the design** (colours, fonts, layouts, CSS) unless asked.
+11. **Comments (giscus):** settings live under `giscus:` in `_config.yml`. Never invent
+    or guess `repo_id`, `category`, or `category_id`; use only values the owner copies
+    from giscus.app. Keep `mapping: pathname` so each essay keeps its own discussion.
+    The widget is off until all three are set. An essay opts out with `comments: false`.
 
 ## Before pushing any change
 

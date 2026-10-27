@@ -1197,6 +1197,35 @@ a.label:hover {
   padding-bottom: var(--section-space);
 }
 
+/* Comments (giscus). Only present when comments are configured. */
+.article-end:not(:last-child) {
+  padding-bottom: 0;
+}
+
+.comments {
+  max-width: var(--measure);
+  margin: 4rem auto 0;
+  padding-bottom: var(--section-space);
+}
+
+.comments .section-head {
+  margin-bottom: 1rem;
+}
+
+.comments-note {
+  margin-bottom: 1.75rem;
+  font-size: 0.9375rem;
+  color: var(--grey-text);
+}
+
+/* giscus draws inside an iframe; its colours come from giscus-theme.css. */
+.comments .giscus,
+.comments .giscus-frame {
+  width: 100%;
+  min-height: 9rem;
+  border: 0;
+}
+
 /* ---------- About ---------- */
 
 .about-grid {

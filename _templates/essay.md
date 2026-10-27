@@ -28,6 +28,7 @@ subtitle: "A sentence that introduces the essay, shown under the title."
 
 # featured: true            # show on the home page as the featured essay
 # dropcap: false            # turn off the large first letter
+# comments: false           # hide reactions and comments on this essay
 ---
 
 Your opening paragraph. Write in plain text; leave a blank line between paragraphs.

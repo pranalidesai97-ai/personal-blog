@@ -29,6 +29,21 @@ twitter_username: ""
 # content="..." value). See PUBLISHING-GUIDE.md, section 8.
 google_site_verification: ""
 
+# Comments and reactions on essays, via giscus (https://giscus.app), which stores
+# them in this repository's GitHub Discussions. The section stays switched off
+# until repo_id, category, and category_id are all filled in. Copy those values
+# from https://giscus.app; see PUBLISHING-GUIDE.md, section 10. Never guess them.
+giscus:
+  repo: "pranalidesai97-ai/personal-blog"
+  repo_id: "R_kgDOVY043g"            # from giscus.app
+  category: "Announcements"          # the Discussions category name (Announcement format)
+  category_id: "DIC_kwDOVY043s4DJvnr" # from giscus.app
+  mapping: "pathname"    # one discussion per essay address
+  strict: "1"            # match the address exactly, never a similar one
+  reactions_enabled: "1"
+  input_position: "bottom"
+  lang: "en"
+
 # Image used when a page or essay has no image of its own (1200 × 630).
 social_image: "/assets/images/social/default.png"
 social_image_alt: "The Quiet Argument: Same questions. Different angles."
