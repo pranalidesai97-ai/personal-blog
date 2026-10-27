@@ -1,0 +1,14 @@
+{%- comment -%}
+  Share buttons for an essay. Hidden until JavaScript confirms they can work.
+  "Share" uses the device's own share sheet where available (most Android
+  browsers); elsewhere it copies the link instead.
+{%- endcomment -%}
+{%- assign share_url = page.url | absolute_url -%}
+<div class="share" data-share data-url="{{ share_url }}" data-title="{{ page.title | escape }}" hidden>
+  <p class="label">Share this essay</p>
+  <div class="share-actions">
+    <button type="button" class="share-button" data-share-native>Share…</button>
+    <button type="button" class="share-button" data-share-copy>Copy link</button>
+  </div>
+  <p class="share-status" data-share-status role="status" aria-live="polite"></p>
+</div>

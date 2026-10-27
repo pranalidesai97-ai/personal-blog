@@ -1,0 +1,20 @@
+# Jekyll build output and caches
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+Gemfile.lock
+vendor/
+
+# Never commit drafts or private notes: this repository is public.
+drafts/
+_drafts/
+*.private.md
+
+# Secrets
+.env
+.env.*
+
+# Local toolchain and previews
+.bundle/
+preview/

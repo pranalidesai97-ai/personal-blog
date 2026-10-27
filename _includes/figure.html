@@ -1,0 +1,21 @@
+{%- comment -%}
+  An image inside an essay, with alternative text and an optional caption.
+  The image file goes in assets/images/essays/<essay-slug>/.
+
+  Usage in an essay:
+    {% include figure.html src="harbour.jpg" alt="Fishing boats in a grey harbour at dawn" caption="Optional caption." %}
+
+  Options:
+    src      file name inside the essay's image folder (required)
+    alt      description for people who can't see the image (required;
+             use alt="" only for purely decorative images)
+    caption  text shown under the image (optional)
+    wide     wide=true makes the image wider than the text column (optional)
+{%- endcomment -%}
+{%- assign img_path = "/assets/images/essays/" | append: page.slug | append: "/" | append: include.src -%}
+<figure class="essay-figure{% if include.wide %} essay-figure--wide{% endif %}" data-optional-image>
+  <img src="{{ img_path | relative_url }}" alt="{{ include.alt | escape }}" loading="lazy" decoding="async">
+  {%- if include.caption %}
+  <figcaption>{{ include.caption }}</figcaption>
+  {%- endif %}
+</figure>

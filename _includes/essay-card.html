@@ -1,0 +1,19 @@
+{%- comment -%}
+  One essay card, used on the home page, the archive, and "Related essays".
+  Usage: {% include essay-card.html essay=essay %}
+{%- endcomment -%}
+{%- assign e = include.essay -%}
+{%- assign summary = e.excerpt | strip_html | normalize_whitespace -%}
+<li class="card{% if e.cover %} has-cover{% endif %}" data-topic="{{ e.category | slugify }}" data-search="{{ e.title | append: ' ' | append: summary | append: ' ' | append: e.category | downcase | escape }}">
+  {%- if e.cover %}
+  <div class="card-cover" data-optional-image>
+    <img src="{{ '/assets/images/essays/' | append: e.slug | append: '/' | append: e.cover | relative_url }}" alt="{{ e.cover_alt | escape }}" loading="lazy" decoding="async">
+  </div>
+  {%- endif %}
+  <div class="card-body">
+    <p class="labels"><span class="label label--marker">{{ e.category }}</span>{% if e.placeholder %}<span class="badge">Placeholder</span>{% endif %}</p>
+    <h3 class="card-title"><a href="{{ e.url | relative_url }}">{{ e.title }}</a></h3>
+    <p class="card-excerpt">{{ summary }}</p>
+    <p class="meta"><time datetime="{{ e.date | date: '%Y-%m-%d' }}">{{ e.date | date: "%-d %B %Y" }}</time><span class="meta-sep" aria-hidden="true">·</span>{% include reading-time.html essay=e %}</p>
+  </div>
+</li>

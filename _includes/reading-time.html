@@ -1,0 +1,13 @@
+{%- comment -%}
+  "5 min read". Uses reading_time from the front matter if set, otherwise
+  estimates from the word count (about 230 words per minute).
+  Usage: {% include reading-time.html essay=page %}
+{%- endcomment -%}
+{%- if include.essay.reading_time -%}
+  {%- assign minutes = include.essay.reading_time -%}
+{%- else -%}
+  {%- assign words = include.essay.content | strip_html | number_of_words -%}
+  {%- assign minutes = words | plus: 115 | divided_by: 230 -%}
+  {%- if minutes < 1 -%}{%- assign minutes = 1 -%}{%- endif -%}
+{%- endif -%}
+{{ minutes }} min read

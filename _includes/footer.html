@@ -1,0 +1,28 @@
+{%- assign social_links = site.social | where_exp: "link", "link.url != ''" | where_exp: "link", "link.url" -%}
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}<span class="brand-mark" aria-hidden="true"></span></a>
+      <p class="footer-desc">{{ site.description }}</p>
+    </div>
+    <nav aria-label="Footer">
+      <p class="label footer-heading">Read</p>
+      <ul class="footer-list">
+        <li><a href="{{ '/' | relative_url }}">Home</a></li>
+        <li><a href="{{ '/articles/' | relative_url }}">Essays</a></li>
+        <li><a href="{{ '/about/' | relative_url }}">About</a></li>
+      </ul>
+    </nav>
+    {%- if social_links.size > 0 %}
+    <div>
+      <p class="label footer-heading">Elsewhere</p>
+      <ul class="footer-list">
+        {%- for link in social_links %}
+        <li><a href="{{ link.url }}"{% unless link.url contains "mailto:" %} rel="me noopener" target="_blank"{% endunless %}>{{ link.label }}</a></li>
+        {%- endfor %}
+      </ul>
+    </div>
+    {%- endif %}
+    <p class="footer-legal">© {{ site.time | date: "%Y" }} {{ site.title }}. An independent publication of essays.</p>
+  </div>
+</footer>

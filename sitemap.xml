@@ -1,0 +1,27 @@
+---
+layout: null
+sitemap: false
+---
+<?xml version="1.0" encoding="UTF-8"?>
+{%- comment -%}
+  Generated on every build. Lists the public pages and every essay,
+  except placeholders and pages marked "sitemap: false" or "noindex: true".
+{%- endcomment %}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for p in site.pages %}
+  {%- unless p.sitemap == false or p.noindex or p.layout == nil %}
+  <url>
+    <loc>{{ p.url | replace: "index.html", "" | absolute_url }}</loc>
+  </url>
+  {%- endunless %}
+{%- endfor %}
+{%- assign essays = site.essays | sort: "date" | reverse %}
+{%- for e in essays %}
+  {%- unless e.placeholder or e.noindex or e.sitemap == false %}
+  <url>
+    <loc>{{ e.url | absolute_url }}</loc>
+    <lastmod>{{ e.updated | default: e.date | date: "%Y-%m-%d" }}</lastmod>
+  </url>
+  {%- endunless %}
+{%- endfor %}
+</urlset>

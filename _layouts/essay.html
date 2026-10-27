@@ -1,0 +1,74 @@
+---
+layout: default
+main_class: container
+---
+{%- assign image_folder = "/assets/images/essays/" | append: page.slug | append: "/" -%}
+<article class="article">
+  <header class="article-header">
+    <p class="labels">
+      <a class="label label--marker" href="{{ '/articles/' | relative_url }}?topic={{ page.category | slugify }}">{{ page.category }}</a>
+      {%- if page.placeholder %}<span class="badge">Placeholder</span>{% endif %}
+    </p>
+    <h1 class="article-title">{{ page.title }}</h1>
+    {%- if page.subtitle %}
+    <p class="article-dek">{{ page.subtitle }}</p>
+    {%- endif %}
+    <p class="meta article-meta">
+      {%- if site.author and site.author != "" %}By {{ site.author }}<span class="meta-sep" aria-hidden="true">·</span>{% endif %}
+      <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%-d %B %Y" }}</time>
+      <span class="meta-sep" aria-hidden="true">·</span>{% include reading-time.html essay=page %}
+      {%- if page.updated %}
+      <span class="article-updated"><span class="meta-sep" aria-hidden="true">·</span>Updated <time datetime="{{ page.updated | date: '%Y-%m-%d' }}">{{ page.updated | date: "%-d %B %Y" }}</time></span>
+      {%- endif %}
+    </p>
+  </header>
+
+  {%- if page.cover %}
+  <figure class="article-cover" data-optional-image>
+    <img src="{{ image_folder | append: page.cover | relative_url }}" alt="{{ page.cover_alt | escape }}" fetchpriority="high" decoding="async">
+    {%- if page.cover_caption %}
+    <figcaption>{{ page.cover_caption }}</figcaption>
+    {%- endif %}
+  </figure>
+  {%- endif %}
+
+  {%- if page.placeholder %}
+  <aside class="notice" role="note">
+    <strong>PLACEHOLDER CONTENT.</strong>
+    This sample essay shows the layout: headings, quotations, lists, a pull quote, and a note.
+    It is not a real essay. Delete <code>_essays/{{ page.slug }}.md</code> once your first real essay is published.
+  </aside>
+  {%- endif %}
+
+  <div class="prose{% unless page.dropcap == false %} dropcap{% endunless %}">
+{{ content }}
+  </div>
+
+  <footer class="article-end">
+    {% include share.html %}
+    <div class="publication-note">
+      <p class="label label--marker">{{ site.title }}</p>
+      <p>{{ site.description }} <a href="{{ '/about/' | relative_url }}">About the publication</a>.</p>
+    </div>
+    <p><a class="text-link" href="{{ '/articles/' | relative_url }}"><span aria-hidden="true">←</span> All essays</a></p>
+  </footer>
+</article>
+
+{%- comment -%} Related essays: same topic first, then the most recent others. {%- endcomment -%}
+{%- assign others = site.essays | where_exp: "e", "e.url != page.url" | sort: "date" | reverse -%}
+{%- assign same_topic = others | where: "category", page.category -%}
+{%- assign other_topics = others | where_exp: "e", "e.category != page.category" -%}
+{%- assign related = same_topic | concat: other_topics -%}
+{%- if related.size > 0 %}
+<section class="related" aria-labelledby="related-heading">
+  <div class="section-head">
+    <h2 class="section-title" id="related-heading">Related essays</h2>
+    <a class="text-link section-link" href="{{ '/articles/' | relative_url }}">All essays <span aria-hidden="true">→</span></a>
+  </div>
+  <ol class="card-grid">
+    {%- for e in related limit: 3 %}
+    {% include essay-card.html essay=e %}
+    {%- endfor %}
+  </ol>
+</section>
+{%- endif %}

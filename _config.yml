@@ -1,0 +1,99 @@
+# ==========================================================================
+# The Quiet Argument: site settings
+#
+# GitHub Pages reads this file every time it builds the site.
+# Changes here affect every page. Keep the indentation (two spaces) exactly.
+# ==========================================================================
+
+title: "The Quiet Argument"
+tagline: "Same questions. Different angles."
+description: "Essays on business, human behaviour, relationships, money, and the details of everyday life."
+
+# Where the site lives. Do not change these unless the repository is renamed
+# or a custom domain is added.
+url: "https://pranalidesai97-ai.github.io"
+baseurl: "/personal-blog"
+
+# Page language (used for <html lang> and social previews).
+lang: "en-GB"
+locale: "en_GB"
+timezone: "UTC"
+
+# Optional. Add your name to show "By <name>" on every essay. Leave "" for no byline.
+author: ""
+
+# Optional. Your X/Twitter handle without the @, used in social-card metadata.
+twitter_username: ""
+
+# Optional. Google Search Console "HTML tag" verification code (only the
+# content="..." value). See PUBLISHING-GUIDE.md, section 8.
+google_site_verification: ""
+
+# Image used when a page or essay has no image of its own (1200 × 630).
+social_image: "/assets/images/social/default.png"
+social_image_alt: "The Quiet Argument: Same questions. Different angles."
+
+# The topics. An essay's "category" must match one of these exactly.
+topics:
+  - "Business"
+  - "Human behaviour"
+  - "Relationships"
+  - "Personal growth"
+  - "Money"
+  - "Everyday observations"
+
+# Social links for the footer and About page. Empty urls are hidden.
+# For email use "mailto:you@example.com".
+social:
+  - label: "Email"
+    url: ""
+  - label: "LinkedIn"
+    url: ""
+  - label: "Instagram"
+    url: ""
+  - label: "Substack"
+    url: ""
+
+# --------------------------------------------------------------------------
+# Build settings (no need to change)
+# --------------------------------------------------------------------------
+
+# No theme: the site uses its own layouts and stylesheet. (Without this line,
+# GitHub Pages applies its default theme, whose CSS would replace ours.)
+theme: null
+
+# Always publish essays, even if their date is "in the future" by GitHub's clock
+# (UTC). Without this, an essay dated today in a timezone ahead of UTC could be
+# listed on the home page while its own page is missing.
+future: true
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+
+# Essays live in _essays/. The file name becomes the permanent address:
+# _essays/the-cost-of-convenience.md -> /articles/the-cost-of-convenience/
+collections:
+  essays:
+    output: true
+    permalink: /articles/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: essays
+    values:
+      layout: essay
+
+# Files that are part of the repository but not part of the website.
+exclude:
+  - README.md
+  - PUBLISHING-GUIDE.md
+  - CLAUDE.md
+  - tools/
+  - _templates/
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
