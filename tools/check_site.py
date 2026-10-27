@@ -170,8 +170,11 @@ def check_images(essays):
                 warn(f"{rel}: use lowercase letters, numbers, and hyphens in image file names")
 
 
-def check_against(ref, essays):
-    """Compare essays with another branch (normally origin/main, the live site)."""
+def check_against(ref, essays, allowed_removals=()):
+    """Compare essays with another branch (normally origin/main, the live site).
+
+    allowed_removals: slugs the owner explicitly asked to delete.
+    """
     try:
         listing = subprocess.run(
             ["git", "ls-tree", "--name-only", f"{ref}:_essays"],
@@ -185,8 +188,11 @@ def check_against(ref, essays):
             continue
         slug = fname[:-3]
         if slug not in essays:
-            error(f"_essays/{fname} exists on {ref} but not here: deleting or renaming it breaks "
-                  f"/articles/{slug}/. Only do this if removal was requested.")
+            if slug in allowed_removals:
+                print(f"  removed essay (requested): /articles/{slug}/ will stop working")
+            else:
+                error(f"_essays/{fname} exists on {ref} but not here: deleting or renaming it breaks "
+                      f"/articles/{slug}/. If the owner asked for this, rerun with --allow-removal {slug}")
             continue
         old_text = subprocess.run(
             ["git", "show", f"{ref}:_essays/{fname}"], cwd=ROOT, capture_output=True, text=True,
@@ -286,6 +292,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--built", metavar="DIR", help="also check links in a built site (e.g. _site)")
     parser.add_argument("--against", metavar="REF", help="compare essays with a git ref (e.g. origin/main)")
+    parser.add_argument("--allow-removal", metavar="SLUG", action="append", default=[],
+                        help="an essay the owner explicitly asked to delete (repeatable)")
     args = parser.parse_args()
 
     config = load_config()
@@ -295,7 +303,7 @@ def main():
     print(f"  {len(essays)} essay(s) in _essays/")
     check_images(essays)
     if args.against:
-        check_against(args.against, essays)
+        check_against(args.against, essays, args.allow_removal)
     if args.built:
         check_built(os.path.join(ROOT, args.built), config)
 

@@ -264,11 +264,11 @@ All lists are built automatically from the essays, newest first:
 To change the featured essay, ask Claude: "Make *X* the featured essay." Claude moves
 the flag so only one essay is featured.
 
-### The sample essay
+### While there is only one essay
 
-*On Noticing the Small Things* is placeholder content: it's labelled "Placeholder"
-and hidden from search engines. When your first real essay is published, ask
-Claude to delete `_essays/a-sample-essay.md`.
+The home page heads it **"The first essay"** instead of "Featured essay", and the
+"Latest essays" and "Related essays" sections stay hidden (they would only repeat it).
+All of this switches automatically when the second essay is published.
 
 ---
 
