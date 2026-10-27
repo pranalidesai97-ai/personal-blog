@@ -765,9 +765,60 @@ a.label:hover {
   border-block: 1px solid var(--border);
 }
 
+.search {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 34rem;
+}
+
+.search-input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.65rem 1rem;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-bottom: 2px solid var(--charcoal);
+  border-radius: 0;
+  font-family: var(--font-text);
+  font-size: 1.0625rem; /* 17px: large enough that phones don't zoom in */
+  color: var(--charcoal);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.search-input::placeholder {
+  color: var(--grey-text);
+  opacity: 1;
+}
+
+.search-input:focus {
+  outline: none;
+  border-bottom-color: var(--mustard);
+  box-shadow: 0 3px 0 0 var(--mustard);
+}
+
+.search-input:focus-visible {
+  outline: 3px solid var(--charcoal);
+  outline-offset: 3px;
+}
+
 .archive-status {
+  min-height: 1.5em;
   font-size: 0.9375rem;
   color: var(--grey-text);
+}
+
+.archive-status:empty {
+  min-height: 0;
+}
+
+/* A button that looks like a text link. */
+.link-button {
+  padding: 0;
+  background: none;
+  border: 0;
+  font-family: var(--font-text);
+  cursor: pointer;
 }
 
 .archive-status strong {
@@ -1008,6 +1059,28 @@ a.label:hover {
   color: var(--grey-text);
 }
 
+/* Images inside essays ({% include figure.html %}). */
+.essay-figure {
+  margin-block: 2.2em;
+}
+
+.essay-figure img {
+  width: 100%;
+  height: auto;
+  background: var(--border);
+}
+
+/* wide=true: a little wider than the text on large screens. */
+@media (min-width: 64rem) {
+  .prose .essay-figure--wide {
+    margin-inline: -6rem;
+  }
+
+  .prose .essay-figure--wide figcaption {
+    padding-inline: 6rem;
+  }
+}
+
 .prose code {
   font-size: 0.85em;
   padding: 0.1em 0.35em;
@@ -1015,7 +1088,7 @@ a.label:hover {
   border: 1px solid var(--border);
 }
 
-/* Large first letter. Remove "dropcap" from the article's class to turn it off. */
+/* Large first letter. Add "dropcap: false" to an essay's front matter to turn it off. */
 .prose.dropcap > p:first-of-type::first-letter {
   float: left;
   margin: 0.06em 0.12em 0 0;
@@ -1031,6 +1104,18 @@ a.label:hover {
   border-top: 1px solid var(--border);
   font-size: 0.85em;
   color: var(--grey-text);
+}
+
+.prose .footnotes ol {
+  padding-left: 1.2em;
+}
+
+.prose .footnotes li + li {
+  margin-top: 0.4em;
+}
+
+.prose .reversefootnote {
+  text-decoration: none;
 }
 
 .prose sup a {
@@ -1058,6 +1143,54 @@ a.label:hover {
 
 .publication-note p:not(.label) {
   font-size: 1rem;
+}
+
+/* Share buttons */
+.share {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.share-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.share-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.5rem 1.25rem;
+  background: var(--cream);
+  border: 1px solid var(--charcoal);
+  font-family: var(--font-text);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.share-button:hover {
+  background: var(--lemon);
+}
+
+.share-button[data-share-native] {
+  background: var(--mustard);
+  border-color: var(--mustard);
+}
+
+.share-button[data-share-native]:hover {
+  background: var(--lemon);
+  border-color: var(--lemon);
+}
+
+.share-status {
+  min-height: 1.5em;
+  font-size: 0.9375rem;
+  color: var(--charcoal);
+  overflow-wrap: anywhere;
 }
 
 .related {

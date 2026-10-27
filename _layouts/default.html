@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+<head>
+{% include head.html %}
+</head>
+<body>
+  {%- if page.collection == "essays" %}
+  <div class="progress" data-progress aria-hidden="true"></div>
+  {%- endif %}
+  {% include header.html %}
+
+  {%- assign main_class = page.main_class | default: layout.main_class %}
+  <main id="main"{% if main_class %} class="{{ main_class }}"{% endif %}>
+{{ content }}
+  </main>
+
+  {% include footer.html %}
+
+  <script src="{{ '/assets/js/main.js' | relative_url }}" defer></script>
+</body>
+</html>

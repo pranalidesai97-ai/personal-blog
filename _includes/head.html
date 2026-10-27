@@ -1,0 +1,105 @@
+{%- comment -%}
+  Page <head>: title, description, canonical URL, and social-preview tags.
+  Everything is derived from the page's front matter and _config.yml.
+{%- endcomment -%}
+{%- assign is_essay = false -%}
+{%- if page.collection == "essays" -%}{%- assign is_essay = true -%}{%- endif -%}
+
+{%- if is_essay -%}
+  {%- assign base_title = page.seo_title | default: page.title -%}
+  {%- assign full_title = base_title | append: " — " | append: site.title -%}
+{%- elsif page.title -%}
+  {%- assign full_title = page.title | append: " — " | append: site.title -%}
+{%- else -%}
+  {%- assign full_title = site.title | append: " — " | append: site.tagline -%}
+{%- endif -%}
+
+{%- assign meta_description = page.description | default: page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 200 -%}
+{%- assign canonical = page.url | replace: "index.html", "" | absolute_url -%}
+
+{%- assign share_image = site.social_image -%}
+{%- assign share_image_alt = site.social_image_alt -%}
+{%- if is_essay -%}
+  {%- assign image_folder = "/assets/images/essays/" | append: page.slug | append: "/" -%}
+  {%- if page.social_image -%}
+    {%- assign share_image = image_folder | append: page.social_image -%}
+    {%- assign share_image_alt = page.cover_alt | default: page.title -%}
+  {%- elsif page.cover -%}
+    {%- assign share_image = image_folder | append: page.cover -%}
+    {%- assign share_image_alt = page.cover_alt | default: page.title -%}
+  {%- endif -%}
+{%- endif -%}
+{%- assign share_image_url = share_image | absolute_url -%}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ full_title | escape }}</title>
+<meta name="description" content="{{ meta_description | escape }}">
+{%- if page.noindex or page.placeholder %}
+<meta name="robots" content="noindex">
+{%- else %}
+<link rel="canonical" href="{{ canonical }}">
+{%- endif %}
+{%- if site.author != "" and site.author %}
+<meta name="author" content="{{ site.author | escape }}">
+{%- endif %}
+{%- if site.google_site_verification != "" and site.google_site_verification %}
+<meta name="google-site-verification" content="{{ site.google_site_verification | escape }}">
+{%- endif %}
+
+<!-- Open Graph (Facebook, LinkedIn, WhatsApp, and others) -->
+<meta property="og:site_name" content="{{ site.title | escape }}">
+<meta property="og:locale" content="{{ site.locale }}">
+<meta property="og:type" content="{% if is_essay %}article{% else %}website{% endif %}">
+<meta property="og:title" content="{{ base_title | default: page.title | default: site.title | escape }}">
+<meta property="og:description" content="{{ meta_description | escape }}">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="og:image" content="{{ share_image_url }}">
+<meta property="og:image:alt" content="{{ share_image_alt | escape }}">
+{%- if is_essay %}
+<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+{%- if page.updated %}
+<meta property="article:modified_time" content="{{ page.updated | date_to_xmlschema }}">
+{%- endif %}
+<meta property="article:section" content="{{ page.category | escape }}">
+{%- endif %}
+
+<!-- X / Twitter card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ base_title | default: page.title | default: site.title | escape }}">
+<meta name="twitter:description" content="{{ meta_description | escape }}">
+<meta name="twitter:image" content="{{ share_image_url }}">
+<meta name="twitter:image:alt" content="{{ share_image_alt | escape }}">
+{%- if site.twitter_username != "" and site.twitter_username %}
+<meta name="twitter:site" content="@{{ site.twitter_username }}">
+{%- endif %}
+
+{%- if is_essay %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ page.title | jsonify }},
+  "description": {{ meta_description | jsonify }},
+  "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+  "dateModified": {{ page.updated | default: page.date | date_to_xmlschema | jsonify }},
+  "image": {{ share_image_url | jsonify }},
+  "mainEntityOfPage": {{ canonical | jsonify }},
+  "articleSection": {{ page.category | jsonify }},
+  "inLanguage": {{ site.lang | jsonify }},
+  {%- if site.author != "" and site.author %}
+  "author": { "@type": "Person", "name": {{ site.author | jsonify }} },
+  {%- else %}
+  "author": { "@type": "Organization", "name": {{ site.title | jsonify }} },
+  {%- endif %}
+  "publisher": { "@type": "Organization", "name": {{ site.title | jsonify }} }
+}
+</script>
+{%- endif %}
+
+<meta name="theme-color" content="#f8f3e8">
+<link rel="icon" href="{{ '/assets/img/favicon.svg' | relative_url }}" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
