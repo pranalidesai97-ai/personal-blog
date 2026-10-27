@@ -122,6 +122,7 @@ featured: true
 | `social_image` | no | A 1200 × 630 image for link previews (otherwise the cover, otherwise the site's default card). |
 | `featured` | no | `true` puts it in the home page's Featured slot. |
 | `dropcap` | no | `false` turns off the large first letter. |
+| `comments` | no | `false` hides reactions and comments on this essay (section 10). |
 | `placeholder` | no | Marks sample content: shows a "Placeholder" label, hides it from search engines. |
 
 ---
@@ -330,7 +331,72 @@ A short message confirms whether the link was copied or shared.
 
 ---
 
-## 10. Without Claude: quick fixes on GitHub
+## 10. Comments and reactions (giscus)
+
+Each essay can end with a **Comments** section powered by
+[giscus](https://giscus.app): free, open source, no ads, no tracking, no API key.
+Comments and reactions are stored as **GitHub Discussions in this repository**, so
+they persist, and you moderate them on GitHub. Readers sign in with a GitHub
+account to react or comment; anyone can read them.
+
+- **One discussion per essay**, matched by the essay's address (`pathname`), e.g.
+  `/personal-blog/articles/should-a-company-eventually-outgrow-its-founder/`.
+  giscus creates it automatically on the first reaction or comment.
+- **Reactions** (👍 ❤️ 🎉 and others) appear above the comments and count for the
+  essay as a whole.
+- The widget uses the site's ivory, mustard, and charcoal colours and Source Sans 3
+  (`assets/css/giscus-theme.css`).
+- To turn comments off for one essay, add `comments: false` to its metadata.
+
+### One-time setup (about 10 minutes)
+
+The section stays hidden until these steps are done and the values are added.
+
+1. **Install the giscus app:** open **github.com/apps/giscus** → **Install** →
+   **Only select repositories** → choose **personal-blog** → **Install**.
+2. **Turn on Discussions:** repository **Settings → General → Features** → tick
+   **Discussions**.
+3. **Create a category for comments:** open the repository's **Discussions** tab →
+   the pencil icon next to **Categories** → **New category**. Name it
+   **Comments**, choose the **Announcement** format (so only you and giscus can start
+   discussions; readers can still reply), then **Create**.
+4. **Get the values:** open **giscus.app** in Chrome. Under **Repository** enter
+   `pranalidesai97-ai/personal-blog` (it should say *all criteria met*). Under
+   **Page ↔ Discussions Mapping** choose **Discussion title contains page
+   `pathname`**. Under **Discussion Category** choose **Comments**.
+5. In the **Enable giscus** box further down the page, find these three values and
+   send them to Claude (or paste the whole snippet):
+   - `data-repo-id="R_…"`
+   - `data-category="Comments"`
+   - `data-category-id="DIC_…"`
+
+   Claude puts them in `_config.yml` under `giscus:` and opens a pull request; after
+   you merge it, the Comments section appears on every essay.
+
+These IDs are not secret (they appear in the page source of every site using
+giscus), but they must be copied exactly: never guessed.
+
+### Moderating comments
+
+Everything happens in the repository's **Discussions** tab on GitHub (also in the
+GitHub mobile app). Each essay's discussion is titled with its address.
+
+| To… | Do this on the comment or discussion |
+| --- | --- |
+| Get notified of new comments | Repository → **Watch** → **Custom** → tick **Discussions**. |
+| Reply as the author | Reply on the essay itself, or in the discussion on GitHub. |
+| Edit or delete a comment | The comment's **⋯** menu → **Edit** or **Delete**. |
+| Hide a comment (spam, abuse, off-topic) | **⋯** → **Hide** → choose a reason. It's collapsed for readers but kept. |
+| Stop new comments on an essay | Open its discussion → right sidebar → **Lock conversation**. |
+| Block someone | Open their GitHub profile → **Block or report**, or your GitHub **Settings → Moderation → Blocked users**. |
+| Calm a busy thread | Repository **Settings → Moderation options → Interaction limits** (temporary limits, e.g. only past contributors). |
+
+Deleting a whole discussion removes that essay's comments and reactions. Prefer
+hiding or locking.
+
+---
+
+## 11. Without Claude: quick fixes on GitHub
 
 For a tiny fix (a typo) you can edit directly on GitHub:
 1. Open `_essays/` → the essay → the **pencil icon**.
@@ -343,7 +409,7 @@ failed and the previous version is still live. Ask Claude to look at it.
 
 ---
 
-## 11. Troubleshooting
+## 12. Troubleshooting
 
 | Problem | What to do |
 | --- | --- |

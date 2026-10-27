@@ -1,0 +1,92 @@
+/*
+ * The Quiet Argument: giscus theme.
+ *
+ * giscus loads this file inside its comment iframe (it is referenced by URL in
+ * _includes/comments.html). It starts from giscus's own light theme, so every
+ * colour giscus needs is defined, then swaps in the site's palette and fonts.
+ * Changes here appear on the live site after the next deployment.
+ */
+@import url("https://giscus.app/themes/light.css");
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap");
+
+main {
+  /* Text */
+  --color-fg-default: #292a27;          /* charcoal */
+  --color-fg-muted: #6c6860;            /* warm grey, readable at small sizes */
+  --color-fg-subtle: #6c6860;
+
+  /* Surfaces */
+  --color-canvas-default: #fffdf7;      /* cream: comment boxes */
+  --color-canvas-overlay: #fffdf7;
+  --color-canvas-inset: #f8f3e8;        /* ivory */
+  --color-canvas-subtle: #f8f3e8;
+  --color-border-default: #ded5c4;      /* warm border */
+  --color-border-muted: #e9e2d4;
+  --color-neutral-muted: rgb(222 213 196 / 45%);
+
+  /* Links and highlights. Mustard is too light for text on ivory, so links
+     use a deep mustard (#7a5900, 6:1 contrast); mustard and lemon are fills. */
+  --color-accent-fg: #7a5900;
+  --color-accent-emphasis: #7a5900;
+  --color-accent-muted: rgb(232 173 0 / 45%);
+  --color-accent-subtle: #fbf0c4;       /* pale lemon: your own reactions */
+  --color-attention-subtle: #fbf0c4;
+  --color-attention-muted: rgb(232 173 0 / 40%);
+
+  /* Buttons */
+  --color-btn-text: #292a27;
+  --color-btn-bg: #fffdf7;
+  --color-btn-border: #ded5c4;
+  --color-btn-shadow: none;
+  --color-btn-inset-shadow: none;
+  --color-btn-hover-bg: #f8f3e8;
+  --color-btn-hover-border: #cfc4b0;
+  --color-btn-active-bg: #f1e9d8;
+  --color-btn-active-border: #cfc4b0;
+  --color-btn-selected-bg: #f1e9d8;
+
+  /* Primary button ("Comment", "Sign in"): mustard with charcoal text, as on the site */
+  --color-btn-primary-text: #292a27;
+  --color-btn-primary-bg: #e8ad00;
+  --color-btn-primary-border: rgb(41 42 39 / 15%);
+  --color-btn-primary-shadow: none;
+  --color-btn-primary-inset-shadow: none;
+  --color-btn-primary-hover-bg: #f7d84a;
+  --color-btn-primary-hover-border: rgb(41 42 39 / 15%);
+  --color-btn-primary-selected-bg: #d9a100;
+  --color-btn-primary-selected-shadow: none;
+  --color-btn-primary-disabled-text: rgb(41 42 39 / 55%);
+  --color-btn-primary-disabled-bg: #f3dc8a;
+  --color-btn-primary-disabled-border: rgb(41 42 39 / 10%);
+
+  /* Write / Preview tabs, menus */
+  --color-segmented-control-bg: #f1e9d8;
+  --color-segmented-control-button-bg: #fffdf7;
+  --color-segmented-control-button-selected-border: #cfc4b0;
+  --color-action-list-item-default-hover-bg: rgb(222 213 196 / 40%);
+
+  /* Reactions */
+  --color-scale-gray-1: #f1e9d8;
+  --color-scale-blue-1: #f7d84a;
+  --color-social-reaction-bg-hover: #f1e9d8;
+  --color-social-reaction-bg-reacted-hover: #f7d84a;
+
+  font-family: "Source Sans 3", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Use the site's text font throughout the widget. */
+main .gsc-main,
+main .markdown,
+main textarea,
+main button,
+main input {
+  font-family: inherit;
+}
+
+/* "3 reactions" / "2 comments" headings in the site's headline face. */
+main .gsc-reactions-count,
+main .gsc-comments-count h4,
+main .gsc-reactions-count h4 {
+  font-family: "DM Serif Display", Georgia, "Times New Roman", serif;
+  font-weight: 400;
+}

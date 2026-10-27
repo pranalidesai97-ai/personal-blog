@@ -51,6 +51,7 @@ main_class: container
     </div>
     <p><a class="text-link" href="{{ '/articles/' | relative_url }}"><span aria-hidden="true">←</span> All essays</a></p>
   </footer>
+  {% include comments.html %}
 </article>
 
 {%- comment -%} Related essays: same topic first, then the most recent others. {%- endcomment -%}

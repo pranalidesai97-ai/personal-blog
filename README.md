@@ -23,7 +23,7 @@ _essays/<slug>.md                 one Markdown file per essay → /articles/<slu
 assets/images/essays/<slug>/      that essay's cover and inline images
 _templates/essay.md               starting point for a new essay (not published)
 _config.yml                       site name, description, topics, social links, SEO settings
-_layouts/  _includes/             page templates (header, footer, cards, SEO tags, share buttons)
+_layouts/  _includes/             page templates (header, footer, cards, SEO tags, share buttons, comments)
 index.html                        home page (hero, topics, featured, latest, about band)
 articles/index.html               essays archive with search and topic filters
 about/index.html                  about page
@@ -31,6 +31,7 @@ about/index.html                  about page
 sitemap.xml                       generated sitemap
 assets/css/style.css              design: palette and fonts are defined at the top
 assets/js/main.js                 archive search/filter, share buttons, progress bar
+assets/css/giscus-theme.css       colours and fonts for the giscus comments widget
 assets/images/social/default.png  default link-preview image (1200 × 630)
 tools/                            build, check, and preview tools (not published)
 ```
