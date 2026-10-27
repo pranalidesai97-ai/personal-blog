@@ -31,7 +31,7 @@ Both might be equally capable. But they aren't starting from the same position.
 
 Social media can help close some of that gap. A founder can share ideas, demonstrate expertise, attract customers and build credibility without waiting for an introduction from someone influential.
 
-In this context, visibility isn't vanity. It's distribution.
+In this context, **visibility isn't vanity. It's distribution.**
 
 A founder's online presence can create opportunities that the business would struggle to generate on its own, particularly in the early stages when the company has little reputation to rely on.
 
@@ -53,13 +53,13 @@ A founder's reputation can help the business earn its first customers. Their ide
 
 But there is an important distinction between using personal credibility to build trust in a company and making that credibility the only reason the company is trusted.
 
-The first creates an opportunity. The second can create a dependency.
+**The first creates an opportunity. The second can create a dependency.**
 
 ## Founder-Led vs. Founder-Dependent: What's the Difference?
 
-A founder-led brand has a visible founder whose ideas, personality or reputation contribute to the company's identity.
+A **founder-led brand** has a visible founder whose ideas, personality or reputation contribute to the company's identity.
 
-A founder-dependent brand goes a step further: the company struggles to maintain its credibility, customer relationships or identity without the founder's constant involvement.
+A **founder-dependent brand** goes a step further: the company struggles to maintain its credibility, customer relationships or identity without the founder's constant involvement.
 
 The two can look almost identical from the outside, especially when a business is growing quickly.
 
@@ -179,7 +179,7 @@ But a founder's reputation is a starting asset, not the entire business model.
 
 The strongest outcome is when the founder's visibility opens the door, the product gives customers a reason to stay, and the company earns enough trust to keep growing beyond the founder's individual reach.
 
-Founder visibility isn't the problem. Founder dependency is.
+**Founder visibility isn't the problem. Founder dependency is.**
 
 People may initially buy because they trust you. But one of the clearest signs that you've built something meaningful is when they continue buying because they trust what you've built.
 
