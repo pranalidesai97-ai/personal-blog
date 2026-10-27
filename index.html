@@ -3,16 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Your Name</title>
-  <meta name="description" content="Essays on business, human behaviour, relationships, personal growth, money, and everyday observations.">
+  <title>The Quiet Argument</title>
+  <meta name="description" content="Essays on business, human behaviour, relationships, money, and the details of everyday life.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Your Name">
-  <meta property="og:description" content="Essays on business, human behaviour, relationships, personal growth, money, and everyday observations.">
-  <meta name="theme-color" content="#f6f1e8">
+  <meta property="og:site_name" content="The Quiet Argument">
+  <meta property="og:title" content="The Quiet Argument">
+  <meta property="og:description" content="Same questions. Different angles. Essays on business, human behaviour, relationships, money, and everyday life.">
+  <meta name="theme-color" content="#f8f3e8">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -20,7 +21,7 @@
 
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="./" data-site-name>Your Name</a>
+      <a class="brand" href="./"><span data-site-name>The Quiet Argument</span><span class="brand-mark" aria-hidden="true"></span></a>
       <nav class="site-nav" aria-label="Main">
         <a href="./" aria-current="page">Home</a>
         <a href="articles/">Essays</a>
@@ -30,55 +31,109 @@
   </header>
 
   <main id="main">
-    <!-- Introduction: edit the sentence and paragraph below to make it yours. -->
-    <section class="intro container" aria-labelledby="intro-title">
-      <p class="eyebrow">Essays &amp; observations</p>
-      <h1 class="intro-title" id="intro-title">
-        Notes on how people work, what they want, and the <em>quiet details</em> of ordinary days.
-      </h1>
-      <p class="intro-text">
-        Essays on business, human behaviour, relationships, personal growth, money, and everyday
-        observations — written slowly, and meant to be read the same way.
-      </p>
-      <ul class="topic-list" data-topic-list aria-label="Topics">
-        <li><a href="articles/">Business</a></li>
-        <li><a href="articles/">Human behaviour</a></li>
-        <li><a href="articles/">Relationships</a></li>
-        <li><a href="articles/">Personal growth</a></li>
-        <li><a href="articles/">Money</a></li>
-        <li><a href="articles/">Everyday observations</a></li>
-      </ul>
+
+    <!-- ===== Hero ===== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="label label--marker">Essays &amp; observations</p>
+          <h1 class="hero-title" id="hero-title">
+            <span class="line">Same questions.</span>
+            <span class="line"><em class="highlight">Different angles.</em></span>
+          </h1>
+          <p class="hero-text">
+            Essays on business, human behaviour, relationships, money, and the details of everyday life.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="articles/" data-latest-link>Read the latest essay <span aria-hidden="true">→</span></a>
+            <a class="text-link" href="articles/">Browse all essays</a>
+          </div>
+        </div>
+
+        <!-- Decorative figure: one point, several angles. Hidden on small screens. -->
+        <figure class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <g fill="none" stroke="#DED5C4" stroke-width="1.25">
+              <circle cx="210" cy="210" r="170"/>
+              <circle cx="210" cy="210" r="104"/>
+              <line x1="20" y1="210" x2="400" y2="210"/>
+              <line x1="210" y1="20" x2="210" y2="400"/>
+              <line x1="45.5" y1="305" x2="374.5" y2="115"/>
+              <line x1="115" y1="45.5" x2="305" y2="374.5"/>
+              <line x1="45.5" y1="115" x2="374.5" y2="305"/>
+            </g>
+            <line x1="31.5" y1="275" x2="388.5" y2="145" stroke="#292A27" stroke-width="2"/>
+            <path d="M270.1 188.1 A64 64 0 0 0 243.9 155.7" fill="none" stroke="#292A27" stroke-width="1.5"/>
+            <line x1="210" y1="210" x2="300.1" y2="65.8" stroke="#E8AD00" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="300.1" cy="65.8" r="24" fill="#F7D84A"/>
+            <circle cx="210" cy="210" r="5" fill="#292A27"/>
+          </svg>
+          <figcaption>Fig. 1 — The same point, seen from elsewhere.</figcaption>
+        </figure>
+      </div>
     </section>
 
+    <!-- ===== Topics ===== -->
+    <section class="topics container" aria-labelledby="topics-heading">
+      <div class="topics-inner">
+        <h2 class="label label--marker" id="topics-heading">Topics</h2>
+        <ul class="chips" data-topic-list>
+          <li><a class="chip" href="articles/?topic=business">Business</a></li>
+          <li><a class="chip" href="articles/?topic=human-behaviour">Human behaviour</a></li>
+          <li><a class="chip" href="articles/?topic=relationships">Relationships</a></li>
+          <li><a class="chip" href="articles/?topic=personal-growth">Personal growth</a></li>
+          <li><a class="chip" href="articles/?topic=money">Money</a></li>
+          <li><a class="chip" href="articles/?topic=everyday-observations">Everyday observations</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== Featured essay (filled in from assets/js/posts.js) ===== -->
     <section class="section container" aria-labelledby="featured-heading">
       <div class="section-head">
-        <h2 class="section-title" id="featured-heading">Featured</h2>
+        <h2 class="section-title" id="featured-heading">Featured essay</h2>
+        <a class="text-link section-link" href="articles/">All essays <span aria-hidden="true">→</span></a>
       </div>
       <div data-featured>
         <noscript>
-          <p class="empty-state">Visit the <a href="articles/">essays archive</a> to read the latest writing.</p>
+          <p class="empty-state">Visit the <a href="articles/">essays archive</a> to read the latest essays.</p>
         </noscript>
       </div>
     </section>
 
-    <section class="section container" aria-labelledby="latest-heading">
+    <!-- ===== Latest essays (hidden until there is more than one essay) ===== -->
+    <section class="section container" aria-labelledby="latest-heading" data-latest-section hidden>
       <div class="section-head">
         <h2 class="section-title" id="latest-heading">Latest essays</h2>
-        <a class="section-link" href="articles/">All essays →</a>
+        <a class="text-link section-link" href="articles/">All essays <span aria-hidden="true">→</span></a>
       </div>
-      <!-- The number below is how many recent essays to list. -->
-      <div data-latest="6"></div>
+      <!-- The number is how many recent essays to show. -->
+      <ol class="card-grid" data-latest="6"></ol>
+    </section>
+
+    <!-- ===== About the publication ===== -->
+    <section class="band" aria-labelledby="band-heading">
+      <div class="container band-inner">
+        <h2 class="label label--marker" id="band-heading">About the publication</h2>
+        <div class="band-body">
+          <p class="band-text">
+            The Quiet Argument explores familiar questions from different angles, challenges easy
+            assumptions, and looks for the ideas that deserve a closer look.
+          </p>
+          <a class="text-link" href="about/">About The Quiet Argument <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand">
-        <a class="brand" href="./" data-site-name>Your Name</a>
-        <p data-site-tagline>Essays on business, human behaviour, relationships, personal growth, money, and everyday life.</p>
+        <a class="brand" href="./"><span data-site-name>The Quiet Argument</span><span class="brand-mark" aria-hidden="true"></span></a>
+        <p class="footer-desc" data-site-tagline>Essays on business, human behaviour, relationships, money, and the details of everyday life.</p>
       </div>
       <nav aria-label="Footer">
-        <p class="footer-heading">Explore</p>
+        <p class="label footer-heading">Read</p>
         <ul class="footer-list">
           <li><a href="./">Home</a></li>
           <li><a href="articles/">Essays</a></li>
@@ -86,10 +141,10 @@
         </ul>
       </nav>
       <div data-social-block hidden>
-        <p class="footer-heading">Elsewhere</p>
+        <p class="label footer-heading">Elsewhere</p>
         <ul class="footer-list" data-social-links></ul>
       </div>
-      <p class="footer-legal">© <span data-year>2026</span> <span data-site-author>Your Name</span></p>
+      <p class="footer-legal">© <span data-year>2026</span> <span data-site-name>The Quiet Argument</span>. An independent publication of essays.</p>
     </div>
   </footer>
 

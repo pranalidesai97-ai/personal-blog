@@ -3,16 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Essays — Your Name</title>
-  <meta name="description" content="Every essay, newest first.">
+  <title>Essays — The Quiet Argument</title>
+  <meta name="description" content="Every essay published in The Quiet Argument, newest first.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Essays">
-  <meta property="og:description" content="Every essay, newest first.">
-  <meta name="theme-color" content="#f6f1e8">
+  <meta property="og:site_name" content="The Quiet Argument">
+  <meta property="og:title" content="Essays — The Quiet Argument">
+  <meta property="og:description" content="Every essay published in The Quiet Argument, newest first.">
+  <meta name="theme-color" content="#f8f3e8">
   <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -20,7 +21,7 @@
 
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="../" data-site-name>Your Name</a>
+      <a class="brand" href="../"><span data-site-name>The Quiet Argument</span><span class="brand-mark" aria-hidden="true"></span></a>
       <nav class="site-nav" aria-label="Main">
         <a href="../">Home</a>
         <a href="./" aria-current="page">Essays</a>
@@ -31,21 +32,22 @@
 
   <main id="main" class="container">
     <header class="page-header">
-      <p class="eyebrow">The archive</p>
+      <p class="label label--marker">The archive</p>
       <h1 class="page-title">Essays</h1>
-      <p class="page-lede">Everything published here, newest first.</p>
+      <p class="page-lede">Every essay published in The Quiet Argument, newest first.</p>
     </header>
 
     <div class="archive-tools">
-      <div class="filter-bar" data-archive-filter role="group" aria-label="Filter by topic" hidden></div>
+      <div class="chips" data-archive-filter role="group" aria-label="Filter essays by topic" hidden></div>
       <p class="archive-status" data-archive-status aria-live="polite" hidden></p>
     </div>
 
+    <!-- Essays are listed automatically from assets/js/posts.js -->
     <div data-archive>
       <noscript>
-        <ul class="post-list">
-          <!-- Without JavaScript, this simple list is shown instead. Keep it in sync with posts.js if you like. -->
-          <li class="post-row"><div class="post-row-body"><h3 class="post-row-title"><a href="a-sample-essay/">On Noticing the Small Things</a></h3></div></li>
+        <!-- Shown only when JavaScript is off. -->
+        <ul class="card-grid">
+          <li class="card"><div class="card-body"><h3 class="card-title"><a href="a-sample-essay/">On Noticing the Small Things</a></h3></div></li>
         </ul>
       </noscript>
     </div>
@@ -54,11 +56,11 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand">
-        <a class="brand" href="../" data-site-name>Your Name</a>
-        <p data-site-tagline>Essays on business, human behaviour, relationships, personal growth, money, and everyday life.</p>
+        <a class="brand" href="../"><span data-site-name>The Quiet Argument</span><span class="brand-mark" aria-hidden="true"></span></a>
+        <p class="footer-desc" data-site-tagline>Essays on business, human behaviour, relationships, money, and the details of everyday life.</p>
       </div>
       <nav aria-label="Footer">
-        <p class="footer-heading">Explore</p>
+        <p class="label footer-heading">Read</p>
         <ul class="footer-list">
           <li><a href="../">Home</a></li>
           <li><a href="./">Essays</a></li>
@@ -66,10 +68,10 @@
         </ul>
       </nav>
       <div data-social-block hidden>
-        <p class="footer-heading">Elsewhere</p>
+        <p class="label footer-heading">Elsewhere</p>
         <ul class="footer-list" data-social-links></ul>
       </div>
-      <p class="footer-legal">© <span data-year>2026</span> <span data-site-author>Your Name</span></p>
+      <p class="footer-legal">© <span data-year>2026</span> <span data-site-name>The Quiet Argument</span>. An independent publication of essays.</p>
     </div>
   </footer>
 

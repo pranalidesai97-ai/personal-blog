@@ -1,6 +1,6 @@
 /*
- * Site behaviour. You normally don't need to edit this file —
- * site settings live in config.js and the article list in posts.js.
+ * Site behaviour. You normally don't need to edit this file:
+ * settings live in config.js and the list of essays in posts.js.
  */
 (function () {
   "use strict";
@@ -57,6 +57,12 @@
     return root + "articles/" + encodeURIComponent(post.slug) + "/";
   }
 
+  // A cover is a file in the essay's folder, or a full web address.
+  function coverUrl(post) {
+    if (!post.cover) return "";
+    return /^(https?:)?\/\//.test(post.cover) ? post.cover : postUrl(post) + post.cover;
+  }
+
   function topicUrl(topic) {
     return root + "articles/?topic=" + slugify(topic);
   }
@@ -73,7 +79,33 @@
     return post.placeholder ? '<span class="badge">Placeholder</span>' : "";
   }
 
-  /* ---------- Site-wide: name, title, footer ---------- */
+  function card(post) {
+    var cover = coverUrl(post);
+    return (
+      '<li class="card' + (cover ? " has-cover" : "") + '">' +
+        (cover
+          ? '<div class="card-cover"><img src="' + escapeHTML(cover) + '" alt="' + escapeHTML(post.coverAlt || "") + '" loading="lazy"></div>'
+          : "") +
+        '<div class="card-body">' +
+          '<p class="labels"><span class="label label--marker">' + escapeHTML(post.topic) + "</span>" + placeholderBadge(post) + "</p>" +
+          '<h3 class="card-title"><a href="' + escapeHTML(postUrl(post)) + '">' + escapeHTML(post.title) + "</a></h3>" +
+          '<p class="card-excerpt">' + escapeHTML(post.excerpt) + "</p>" +
+          '<p class="meta">' + postMeta(post) + "</p>" +
+        "</div>" +
+      "</li>"
+    );
+  }
+
+  /* ---------- Every page: name, title, byline, footer ---------- */
+
+  // The 404 page sets a <base> tag, which would make "#section" links point
+  // at the home page. Keep them on the current page instead.
+  function fixHashLinks() {
+    if (!document.querySelector("base")) return;
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.setAttribute("href", window.location.pathname + window.location.search + a.getAttribute("href"));
+    });
+  }
 
   function applyConfig() {
     var siteName = config.siteName;
@@ -84,14 +116,17 @@
       var pageTitle = html.getAttribute("data-page-title");
       document.title = pageTitle ? pageTitle + " — " + siteName : siteName;
     }
-    if (config.author) {
-      document.querySelectorAll("[data-site-author]").forEach(function (el) {
-        el.textContent = config.author;
-      });
-    }
     if (config.tagline) {
       document.querySelectorAll("[data-site-tagline]").forEach(function (el) {
         el.textContent = config.tagline;
+      });
+    }
+    // Article byline: shown only when an author name is set in config.js.
+    if (config.author) {
+      document.querySelectorAll("[data-byline]").forEach(function (el) {
+        var name = el.querySelector("[data-site-author]");
+        if (name) name.textContent = config.author;
+        el.hidden = false;
       });
     }
     document.querySelectorAll("[data-year]").forEach(function (el) {
@@ -135,14 +170,22 @@
 
   /* ---------- Home page ---------- */
 
-  function renderTopics() {
+  function renderTopicLinks() {
     var list = document.querySelector("[data-topic-list]");
     if (!list) return;
     list.innerHTML = (config.topics || [])
       .map(function (topic) {
-        return '<li><a href="' + escapeHTML(topicUrl(topic)) + '">' + escapeHTML(topic) + "</a></li>";
+        return '<li><a class="chip" href="' + escapeHTML(topicUrl(topic)) + '">' + escapeHTML(topic) + "</a></li>";
       })
       .join("");
+  }
+
+  // Point the "Read the latest essay" button at the newest essay.
+  function linkLatest() {
+    if (!posts.length) return;
+    document.querySelectorAll("[data-latest-link]").forEach(function (a) {
+      a.setAttribute("href", postUrl(posts[0]));
+    });
   }
 
   function renderFeatured() {
@@ -150,65 +193,45 @@
     if (!target) return null;
     var featured = posts.filter(function (p) { return p.featured; })[0] || posts[0];
     if (!featured) {
-      target.innerHTML = '<p class="empty-state">The first essay is on its way.</p>';
+      target.innerHTML = '<p class="empty-state">The first essay is being written.</p>';
       return null;
     }
+    var cover = coverUrl(featured);
     target.innerHTML =
-      '<article class="featured-card">' +
-        '<p class="eyebrow">' +
-          '<a href="' + escapeHTML(topicUrl(featured.topic)) + '">' + escapeHTML(featured.topic) + "</a>" +
-          placeholderBadge(featured) +
-        "</p>" +
-        '<h2 class="featured-title"><a href="' + escapeHTML(postUrl(featured)) + '">' + escapeHTML(featured.title) + "</a></h2>" +
-        '<p class="featured-excerpt">' + escapeHTML(featured.excerpt) + "</p>" +
-        '<p class="post-meta">' + postMeta(featured) + "</p>" +
-        '<a class="read-link" href="' + escapeHTML(postUrl(featured)) + '">Read the essay <span aria-hidden="true">→</span></a>' +
+      '<article class="feature' + (cover ? " has-cover" : "") + '">' +
+        (cover
+          ? '<a class="feature-cover" href="' + escapeHTML(postUrl(featured)) + '" tabindex="-1" aria-hidden="true">' +
+            '<img src="' + escapeHTML(cover) + '" alt="' + escapeHTML(featured.coverAlt || "") + '"></a>'
+          : "") +
+        '<div class="feature-body">' +
+          '<p class="labels"><a class="label label--marker" href="' + escapeHTML(topicUrl(featured.topic)) + '">' +
+            escapeHTML(featured.topic) + "</a>" + placeholderBadge(featured) + "</p>" +
+          '<h3 class="feature-title"><a href="' + escapeHTML(postUrl(featured)) + '">' + escapeHTML(featured.title) + "</a></h3>" +
+          '<p class="feature-excerpt">' + escapeHTML(featured.excerpt) + "</p>" +
+          '<p class="meta">' + postMeta(featured) + "</p>" +
+          '<a class="text-link" href="' + escapeHTML(postUrl(featured)) + '">Read the essay <span aria-hidden="true">→</span></a>' +
+        "</div>" +
       "</article>";
     return featured;
   }
 
+  // Latest essays, not repeating the featured one. If there are no others
+  // yet, the whole section is hidden rather than showing an empty box.
   function renderLatest(exclude) {
     var target = document.querySelector("[data-latest]");
     if (!target) return;
     var limit = parseInt(target.getAttribute("data-latest"), 10) || 6;
     var latest = posts.filter(function (p) { return p !== exclude; }).slice(0, limit);
+    var section = target.closest("[data-latest-section]");
     if (!latest.length) {
-      target.innerHTML =
-        '<p class="empty-state">More essays are on the way. In the meantime, the ' +
-        '<a href="' + escapeHTML(root) + 'articles/">archive</a> collects everything published so far.</p>';
+      if (section) section.hidden = true;
       return;
     }
-    target.innerHTML =
-      '<ol class="post-list">' +
-      latest
-        .map(function (post) {
-          return (
-            '<li class="post-row">' +
-              '<p class="post-row-meta">' + postMeta(post) + "</p>" +
-              '<div class="post-row-body">' +
-                '<p class="eyebrow"><a href="' + escapeHTML(topicUrl(post.topic)) + '">' + escapeHTML(post.topic) + "</a>" + placeholderBadge(post) + "</p>" +
-                '<h3 class="post-row-title"><a href="' + escapeHTML(postUrl(post)) + '">' + escapeHTML(post.title) + "</a></h3>" +
-                '<p class="post-row-excerpt">' + escapeHTML(post.excerpt) + "</p>" +
-              "</div>" +
-            "</li>"
-          );
-        })
-        .join("") +
-      "</ol>";
+    target.innerHTML = latest.map(card).join("");
+    if (section) section.hidden = false;
   }
 
-  /* ---------- Archive page ---------- */
-
-  function card(post) {
-    return (
-      '<li class="card">' +
-        '<p class="eyebrow">' + escapeHTML(post.topic) + placeholderBadge(post) + "</p>" +
-        '<h3 class="card-title"><a href="' + escapeHTML(postUrl(post)) + '">' + escapeHTML(post.title) + "</a></h3>" +
-        '<p class="card-excerpt">' + escapeHTML(post.excerpt) + "</p>" +
-        '<p class="post-meta">' + postMeta(post) + "</p>" +
-      "</li>"
-    );
-  }
+  /* ---------- Essays archive ---------- */
 
   function renderArchive() {
     var target = document.querySelector("[data-archive]");
@@ -216,45 +239,36 @@
     var filterBar = document.querySelector("[data-archive-filter]");
     var status = document.querySelector("[data-archive-status]");
 
-    // Topics that actually have articles, in the order given in config.js.
-    var knownTopics = (config.topics || []).slice();
+    // Topics from config.js, plus any used in posts.js but missing there.
+    var topics = (config.topics || []).slice();
     posts.forEach(function (p) {
-      if (p.topic && knownTopics.indexOf(p.topic) === -1) knownTopics.push(p.topic);
-    });
-    var usedTopics = knownTopics.filter(function (t) {
-      return posts.some(function (p) { return p.topic === t; });
+      if (p.topic && topics.indexOf(p.topic) === -1) topics.push(p.topic);
     });
 
     function topicFromSlug(slug) {
-      return knownTopics.filter(function (t) { return slugify(t) === slug; })[0] || null;
+      return topics.filter(function (t) { return slugify(t) === slug; })[0] || null;
     }
 
-    var params = new URLSearchParams(window.location.search);
-    var active = topicFromSlug(params.get("topic"));
+    var active = topicFromSlug(new URLSearchParams(window.location.search).get("topic"));
 
     function draw() {
       var visible = active ? posts.filter(function (p) { return p.topic === active; }) : posts;
 
       if (filterBar) {
-        if (usedTopics.length > 1) {
-          filterBar.hidden = false;
-          filterBar.innerHTML = [null].concat(usedTopics)
-            .map(function (topic) {
-              var pressed = topic === active;
-              return (
-                '<button type="button" class="chip" data-topic="' + escapeHTML(topic ? slugify(topic) : "") + '" aria-pressed="' + pressed + '">' +
-                escapeHTML(topic || "All") + "</button>"
-              );
-            })
-            .join("");
-        } else {
-          filterBar.hidden = true;
-        }
+        filterBar.hidden = !posts.length;
+        filterBar.innerHTML = [null].concat(topics)
+          .map(function (topic) {
+            return (
+              '<button type="button" class="chip" data-topic="' + escapeHTML(topic ? slugify(topic) : "") +
+              '" aria-pressed="' + (topic === active) + '">' + escapeHTML(topic || "All essays") + "</button>"
+            );
+          })
+          .join("");
       }
 
       if (status) {
         status.innerHTML = active
-          ? "Filed under <strong>" + escapeHTML(active) + '</strong> · <a href="./">View all essays</a>'
+          ? "Showing essays filed under <strong>" + escapeHTML(active) + "</strong>."
           : "";
         status.hidden = !active;
       }
@@ -262,7 +276,7 @@
       if (!visible.length) {
         target.innerHTML = active
           ? '<p class="empty-state">Nothing filed under ' + escapeHTML(active) + ' yet. <a href="./">See all essays</a>.</p>'
-          : '<p class="empty-state">No essays have been published yet.</p>';
+          : '<p class="empty-state">No essays have been published yet. The first one is being written.</p>';
         return;
       }
 
@@ -317,28 +331,20 @@
       readingEl.textContent = Math.max(1, Math.round(words / 230)) + " min read";
     }
 
-    // Previous / next links, from posts.js.
-    var nav = document.querySelector("[data-article-nav]");
-    var index = posts.findIndex(function (p) { return p.slug === slug; });
-    if (nav && index !== -1) {
-      var newer = posts[index - 1];
-      var older = posts[index + 1];
-      var parts = [];
-      if (older) {
-        parts.push(
-          '<a class="article-nav-link" href="' + escapeHTML(postUrl(older)) + '" rel="prev">' +
-          '<span class="eyebrow">Previous essay</span><span class="article-nav-title">' + escapeHTML(older.title) + "</span></a>"
-        );
-      }
-      if (newer) {
-        parts.push(
-          '<a class="article-nav-link article-nav-next" href="' + escapeHTML(postUrl(newer)) + '" rel="next">' +
-          '<span class="eyebrow">Next essay</span><span class="article-nav-title">' + escapeHTML(newer.title) + "</span></a>"
-        );
-      }
-      if (parts.length) {
-        nav.innerHTML = parts.join("");
-        nav.hidden = false;
+    // Related essays: same topic first, then the most recent others.
+    var related = document.querySelector("[data-related]");
+    var current = posts.filter(function (p) { return p.slug === slug; })[0];
+    if (related) {
+      var others = posts.filter(function (p) { return p.slug !== slug; });
+      var picks = current
+        ? others.filter(function (p) { return p.topic === current.topic; })
+            .concat(others.filter(function (p) { return p.topic !== current.topic; }))
+        : others;
+      picks = picks.slice(0, 3);
+      var list = related.querySelector("[data-related-list]");
+      if (picks.length && list) {
+        list.innerHTML = picks.map(card).join("");
+        related.hidden = false;
       }
     }
 
@@ -366,21 +372,13 @@
     }
   }
 
-  // The 404 page sets a <base> tag, which would make "#section" links point
-  // at the home page. Keep them on the current page instead.
-  function fixHashLinks() {
-    if (!document.querySelector("base")) return;
-    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
-      a.setAttribute("href", window.location.pathname + window.location.search + a.getAttribute("href"));
-    });
-  }
-
   /* ---------- Run ---------- */
 
   fixHashLinks();
   applyConfig();
   renderSocial();
-  renderTopics();
+  renderTopicLinks();
+  linkLatest();
   renderLatest(renderFeatured());
   renderArchive();
   enhanceArticle();
