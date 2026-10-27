@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" data-root="" data-page-title="Page not found">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    // GitHub Pages shows this page at whatever address was not found
+    // (e.g. /personal-blog/some/missing/page), so relative links need a fixed
+    // starting point. SITE_BASE must match where the site lives:
+    //   - project site  https://USERNAME.github.io/personal-blog/  ->  "/personal-blog/"
+    //   - user site or custom domain                               ->  "/"
+    (function () {
+      var SITE_BASE = "/personal-blog/";
+      if (location.pathname.indexOf(SITE_BASE) === 0) {
+        document.write('<base href="' + SITE_BASE + '">');
+      }
+    })();
+  </script>
+  <meta name="robots" content="noindex">
+  <title>Page not found — Your Name</title>
+  <meta name="theme-color" content="#f6f1e8">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./" data-site-name>Your Name</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="./">Home</a>
+        <a href="articles/">Essays</a>
+        <a href="about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <section class="not-found">
+      <p class="eyebrow">Error 404</p>
+      <h1 class="page-title">This page has wandered off.</h1>
+      <p class="page-lede">
+        The address may be mistyped, or the page may have moved. Either way, there's still plenty to read.
+      </p>
+      <div class="not-found-links">
+        <a class="read-link" href="./">Go to the home page <span aria-hidden="true">→</span></a>
+        <a class="read-link" href="articles/">Browse all essays <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="./" data-site-name>Your Name</a>
+        <p data-site-tagline>Essays on business, human behaviour, relationships, personal growth, money, and everyday life.</p>
+      </div>
+      <nav aria-label="Footer">
+        <p class="footer-heading">Explore</p>
+        <ul class="footer-list">
+          <li><a href="./">Home</a></li>
+          <li><a href="articles/">Essays</a></li>
+          <li><a href="about/">About</a></li>
+        </ul>
+      </nav>
+      <div data-social-block hidden>
+        <p class="footer-heading">Elsewhere</p>
+        <ul class="footer-list" data-social-links></ul>
+      </div>
+      <p class="footer-legal">© <span data-year>2026</span> <span data-site-author>Your Name</span></p>
+    </div>
+  </footer>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/posts.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
