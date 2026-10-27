@@ -35,9 +35,9 @@ google_site_verification: ""
 # from https://giscus.app; see PUBLISHING-GUIDE.md, section 10. Never guess them.
 giscus:
   repo: "pranalidesai97-ai/personal-blog"
-  repo_id: ""            # from giscus.app, starts with "R_"
-  category: ""           # the Discussions category name, e.g. "Comments"
-  category_id: ""        # from giscus.app, starts with "DIC_"
+  repo_id: "R_kgDOVY043g"            # from giscus.app
+  category: "General"                # the Discussions category name
+  category_id: "DIC_kwDOVY043s4DJvns" # from giscus.app
   mapping: "pathname"    # one discussion per essay address
   strict: "1"            # match the address exactly, never a similar one
   reactions_enabled: "1"
