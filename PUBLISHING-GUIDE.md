@@ -356,18 +356,21 @@ The section stays hidden until these steps are done and the values are added.
    **Only select repositories** → choose **personal-blog** → **Install**.
 2. **Turn on Discussions:** repository **Settings → General → Features** → tick
    **Discussions**.
-3. **Create a category for comments:** open the repository's **Discussions** tab →
-   the pencil icon next to **Categories** → **New category**. Name it
-   **Comments**, choose the **Announcement** format (so only you and giscus can start
-   discussions; readers can still reply), then **Create**.
+3. **Choose a category:** this site uses GitHub's built-in **Announcements**
+   category, which has the **Announcement** format: only you and giscus can start
+   discussions, and readers can still react and reply. (To use a differently named
+   category instead, switch to Chrome's **Desktop site**, open
+   `github.com/pranalidesai97-ai/personal-blog/discussions/categories` → **New
+   category**, and pick the **Announcement** format.)
 4. **Get the values:** open **giscus.app** in Chrome. Under **Repository** enter
    `pranalidesai97-ai/personal-blog` (it should say *all criteria met*). Under
    **Page ↔ Discussions Mapping** choose **Discussion title contains page
-   `pathname`**. Under **Discussion Category** choose **Comments**.
+   `pathname`**. Under **Discussion Category** choose **Announcements**. Ignore the
+   **Theme** list; the site uses its own theme.
 5. In the **Enable giscus** box further down the page, find these three values and
    send them to Claude (or paste the whole snippet):
    - `data-repo-id="R_…"`
-   - `data-category="Comments"`
+   - `data-category="Announcements"`
    - `data-category-id="DIC_…"`
 
    Claude puts them in `_config.yml` under `giscus:` and opens a pull request; after
